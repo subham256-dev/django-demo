@@ -1,0 +1,230 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelVerse | Admin Dashboard</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --glass-bg: rgba(255, 255, 255, 0.50);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f1a;
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            backdrop-filter: blur(15px);
+            background: rgba(11, 15, 26, 0.8) !important;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        /* --- Hero --- */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(11, 15, 26, 0.6), #0b0f1a), 
+                        url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- Glass Cards --- */
+        .place-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+        }
+
+        .place-card:hover {
+            transform: translateY(-10px);
+            border-color: #a855f7;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .card-img-top {
+            height: 220px;
+            object-fit: cover;
+            border-radius: 24px 24px 0 0;
+        }
+
+        /* --- Buttons --- */
+        .btn-premium {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-premium:hover {
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+            transform: scale(1.02);
+            color: white;
+        }
+
+        .crud-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            transition: 0.3s;
+        }
+
+        /* --- Modal Styling --- */
+        .modal-content {
+            background: #161b2c;
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+        }
+
+        .form-control {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .form-control:focus {
+            background: rgba(255,255,255,0.08);
+            border-color: #a855f7;
+            color: white;
+            box-shadow: none;
+        }
+
+        /* --- Floating Action Button --- */
+        .fab {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 70px;
+            height: 70px;
+            background: var(--primary-gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            z-index: 1000;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .fab:hover {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+ 
+
+    <!-- Floating Button (Triggers Form) -->
+    <div class="fab" data-bs-toggle="modal" >
+        <a href="/add/"><i class="bi bi-plus-lg"></i></a>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="#">TRAVEL<span class="text-info">VERSE</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container text-center">
+            <h1 class="display-3 fw-bold mb-3">Your Next <span class="text-info">Adventure</span></h1>
+            <p class="lead opacity-75">Manage and discover the world's most luxurious destinations.</p>
+        </div>
+    </section>
+
+    <!-- Places Container -->
+     
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-end mb-5">
+            <div>
+                <h2 class="fw-bold">Popular Places</h2>
+                <div style="width: 60px; height: 4px; background: var(--primary-gradient);"></div>
+            </div>
+        </div>
+
+        <div class="row g-4" id="placesGrid">
+            {% for place in places %}
+           
+            <!-- Initial Cards (Example 1) -->
+            <div class="col-md-6 col-lg-3 place-item">
+                <div class="place-card card h-100 border-0">
+                    <img src="/media/{{ place.image }}" class="card-img-top" alt="{{ place.name }}">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h5 class="fw-bold">{{ place.name }}</h5>
+                            <span class="text-warning"><i class="bi bi-star-fill"></i> {{ place.rating }}</span>
+                        </div>
+                        <p class="small text-info mb-2"><i class="bi bi-geo-alt me-1"></i>{{ place.location }}</p>
+                        <p class="small opacity-100">{{ place.description }}</p>
+                        <div class="d-flex gap-2 mt-4">
+                            <button class="crud-btn btn-primary w-100" title="Update"><a href="/update_place/{{ place.id }}/"><i class="bi bi-pencil-square"></i></a></button>
+                            <button class="crud-btn btn-danger w-100" title="Delete"><a href="/delete_place/{{ place.id }}/"><i class="bi bi-trash"></i></a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- More cards would follow the same pattern... -->
+             {% endfor %}
+        </div>
+        
+    </div>
+    
+
+    <!-- Modal Form (Add New Place) -->
+    
+
+    <!-- Footer -->
+    <footer class="py-5 mt-5 border-top border-secondary">
+        <div class="container text-center opacity-50">
+            <p>&copy; 2026 TravelVerse Luxury. Designed for Modern Explorers.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    
+    </script>
+</body>
+</html>

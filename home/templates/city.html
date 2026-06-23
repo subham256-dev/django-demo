@@ -1,0 +1,44 @@
+{% extends "base.html"%}
+
+
+{%block start%}
+
+    <h1 class="text-center">TOP CITY LIST</h1>
+
+    <a href="/contact/">Contact</a>
+    |
+    <a href="/about/">About</a>
+    |
+    <a href="/">Home</a>
+   
+
+   <table class="container">
+  <tr>
+    <th>S.No</th>
+    <th>City-Name</th>
+    <th>Rating</th>
+    <th>Conclusion</th>
+  </tr>
+  {% for city in cities %}
+ <tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{city.name}}</td>
+    <td>{{city.rating}}</td>
+     <td >
+       {% if city.rating >= 4.8 %} 
+       Excellent
+       {% elif city.rating >= 4.5  %}
+        Good
+       {% elif city.rating >= 4 %}
+        Modrate
+       {% else %} 
+       Bad
+       {% endif %}
+     </td>
+ </tr>
+  {% endfor %}
+      
+</table>
+
+
+ {%endblock%}

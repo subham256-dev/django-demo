@@ -1,0 +1,38 @@
+{% extends "base.html"%}
+
+
+{%block start%}
+
+    <h1>This is Home page</h1>
+
+    <a href="/contact/">Contact</a>
+    |
+     <a href="/about/">About</a>
+   
+
+   <table class="container">
+  <tr>
+    <th>S.No</th>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Vote</th>
+  </tr>
+  {% for people in people %}
+ <tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{people.name}}</td>
+    <td>{{people.age}}</td>
+     <td  {% if people.age >= 18 %} style="background:lightgreen"{%else%} style="background:red"{% endif %}>
+        {% if people.age >= 18 %}
+        👍
+        {% else %}
+        👎
+        {% endif %}
+     </td>
+ </tr>
+  {% endfor %}
+      
+</table>
+
+
+ {%endblock%}
